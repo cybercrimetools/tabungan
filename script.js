@@ -106,3 +106,49 @@ function resetData() {
     
     alert('Semua data telah direset!');
 }
+// Fungsi untuk menghitung dan menampilkan sisa saldo pengeluaran mingguan
+function updateWeeklyBalanceStatus() {
+    const remainingWeeklyBalance = weeklyLimit - weeklyExpense;
+    const statusElement = document.getElementById('expense-status');
+    if (remainingWeeklyBalance >= 0) {
+        statusElement.innerText = `Pengeluaran Minggu Ini: ${formatCurrency(weeklyExpense)} (Sisa Batas: ${formatCurrency(remainingWeeklyBalance)})`;
+    } else {
+        statusElement.innerText = `Pengeluaran Minggu Ini: ${formatCurrency(weeklyExpense)} (Melebihi Batas: ${formatCurrency(Math.abs(remainingWeeklyBalance))})`;
+    }
+}
+
+// Modifikasi fungsi addExpense untuk memperbarui sisa saldo mingguan
+function addExpense() {
+    const expense = parseInt(document.getElementById('expense').value);
+    if (isNaN(expense) || expense <= 0) {
+        alert("Masukkan jumlah pengeluaran yang valid.");
+        return;
+    }
+    if (weeklyExpense + expense > weeklyLimit) {
+        alert("Pengeluaran melebihi batas mingguan.");
+        return;
+    }
+    balance -= expense;
+    weeklyExpense += expense;
+    localStorage.setItem('balance', balance);
+    localStorage.setItem('weeklyExpense', weeklyExpense);
+    document.getElementById('balance').innerText = formatCurrency(balance);
+    updateWeeklyBalanceStatus(); // Panggil fungsi untuk memperbarui status
+    document.getElementById('expense').value = '';
+}
+
+// Modifikasi fungsi setWeeklyLimit untuk memperbarui sisa saldo setelah batas diatur
+function setWeeklyLimit() {
+    const limit = parseInt(document.getElementById('weekly-expense-input').value);
+    if (isNaN(limit) || limit <= 0) {
+        alert("Masukkan batas pengeluaran yang valid.");
+        return;
+    }
+    weeklyLimit = limit;
+    localStorage.setItem('weeklyLimit', weeklyLimit);
+    updateWeeklyBalanceStatus(); // Perbarui status sisa saldo mingguan
+    document.getElementById('weekly-expense-input').value = '';
+}
+
+// Panggil fungsi untuk menampilkan data awal
+updateWeeklyBalanceStatus();
