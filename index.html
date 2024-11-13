@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengelola Keuangan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Pengelola Keuangan</h1>
+            <p>Kelola Tabungan dan Pengeluaran Anda</p>
+        </header>
+
+        <main class="main-content">
+            <div class="card saldo-card">
+                <h2>Saldo Tabungan</h2>
+                <p id="balance">Rp 0</p>
+            </div>
+
+<!-- Reset Button -->
+<div class="card reset-card">
+    <button class="reset-btn" onclick="resetData()">Reset Semua Data</button>
+</div>
+
+
+            <div class="card pemasukan-card">
+                <h2>Pemasukan</h2>
+                <div class="input-group">
+                    <input type="number" id="deposit" placeholder="Masukkan pemasukan" />
+                    <button onclick="updateBalance()">Setorkan Pemasukan</button>
+                </div>
+            </div>
+
+            <div class="card pengeluaran-card">
+                <h2>Pengeluaran</h2>
+                <div class="input-group">
+                    <input type="number" id="expense" placeholder="Masukkan pengeluaran" />
+                    <button onclick="addExpense()">Tambah Pengeluaran</button>
+                </div>
+                <p id="expense-status">Pengeluaran Minggu Ini: Rp 0</p>
+            </div>
+
+            <div class="card weekly-limit-card">
+                <h2>Batas Pengeluaran Mingguan</h2>
+                <input type="number" id="weekly-expense-input" placeholder="Batas Pengeluaran Mingguan" />
+                <button onclick="setWeeklyLimit()">Atur Batas</button>
+            </div>
+
+            <div class="card goal-card">
+                <h2>Tujuan Tabungan</h2>
+                <input type="text" id="goal-name" placeholder="Nama Tujuan Tabungan" />
+                <input type="number" id="goal-amount" placeholder="Jumlah Tujuan" />
+                <button onclick="setGoal()">Atur Tujuan</button>
+                <p id="goal-progress">0 dari 0</p>
+            </div>
+        </main>
+        
+        <footer class="app-footer">
+            <p>&copy; 2024 Pengelola Keuangan</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
